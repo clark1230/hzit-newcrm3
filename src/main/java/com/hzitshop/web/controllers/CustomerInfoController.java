@@ -390,6 +390,11 @@ public class CustomerInfoController {
         Map<String, Object> resultMap = new HashMap<>();
         ctr.setRecordDate(new Date());
         try {
+            //到customer_info中修改最新跟进时间
+            CustomerInfo customerInfo = new CustomerInfo() ;
+            customerInfo.setCustomerId(ctr.getCustomerId());
+            customerInfo.setLastTime(new Date());
+            iCustomerInfoService.updateById(customerInfo);
             iCustomerTraceRecordService.insert(ctr);   //保存跟进记录!!
             resultMap.put("code", 200);
         } catch (Exception e) {
