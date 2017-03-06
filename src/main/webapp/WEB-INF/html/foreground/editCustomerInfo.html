@@ -1,0 +1,73 @@
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>修改录入信息</title>
+    <meta name="apple-mobile-web-app-title" content="Amaze UI" />
+    <link rel="stylesheet" href="/assets/amazeui/css/amazeui.min.css" />
+    <link rel="stylesheet" href="/assets/amazeui/css/amazeui.datatables.min.css" />
+    <link rel="stylesheet" href="/assets/amazeui/css/app.css">
+    <script src="/assets/amazeui/js/jquery.min.js"></script>
+    <script src="/assets/amazeui/js/amazeui.min.js"></script>
+    <script src="/assets/amazeui/js/amazeui.datatables.min.js"></script>
+    <script src="/assets/amazeui/js/dataTables.responsive.min.js"></script>
+    <script src="/assets/amazeui/js/app.js"></script>
+    <script src="/assets/layer/layer.js"></script>
+    <style>
+        .am-radio{
+            float:left;
+            width:64px;
+            height:24px;
+        }
+        #btnEditCustomerInfo{
+            clear:left;
+        }
+    </style>
+
+</head>
+<body>
+<form class="am-form" id="editCustomerInfoForm" method="post">
+    <!--customerId-->
+    <input type="hidden" name="customerId" th:value="${customerInfo.customerId}">
+   <!-- <span th:value="${customerInfo}"></span>-->
+    <!--<input type="text" th:value="${custmoerInfo.userId}">-->
+    <fieldset >
+        <div class="am-form-group">
+            <label for="realName">应聘者名:</label>
+            <input type="text" name="realName" id="realName"
+                   th:value="${customerInfo.realName}"  class="am-form-field am-radius"  placeholder="请输入应聘者名!">
+        </div>
+        <div class="am-form-group">
+            <label for="realName">电话号码:</label>
+            <input type="text" name="tel" id="tel"
+                   th:value="${customerInfo.tel}"  class="am-form-field am-radius"  placeholder="请输入电话号码!">
+        </div>
+        <div class="am-form-group">
+            <label for="userId">咨询师:</label>
+            <select id="userId" name="userId">
+                <option th:each="employeeInfoVo,employeeInfoVoStat:${employeeInfoVoList}"
+                        th:selected="${employeeInfoVo.userId == customerInfo.userId}"
+                        th:text="${employeeInfoVo.name}" th:value="${employeeInfoVo.userId}"></option>
+            </select>
+        </div>
+        <div  style="width:100%;height:60px;margin-top:34px;">
+            <span>
+                <label class="am-radio" style="margin-top: -7px;margin-right: 14px;">
+                    <input type="radio"  th:checked="${customerInfo.customerState==28}" name="customerState"  value="28" data-am-ucheck >待面试
+                </label>
+                <label class="am-radio" style="margin-top: -7px;margin-right: 14px;">
+                    <input type="radio"  th:checked="${customerInfo.customerState==29}" name="customerState"  value="29" data-am-ucheck >已面试
+                </label>
+                <label class="am-radio">
+                    <input type="radio" th:checked="${customerInfo.customerState==40}" name="customerState"   value="40" data-am-ucheck>无效
+                </label>
+               <!-- <label class="am-radio">
+                    <input type="radio"  disabled id="customerState3"  name="customerState"   data-am-ucheck>其他
+                </label>-->
+            </span>
+        </div>
+        <button type="button" id="btnEditCustomerInfo" class="am-btn am-btn-primary am-radius am-btn-xs">修改</button>
+        <button type="button" id="btnClose" class="am-btn am-btn-warning am-radius am-btn-xs">关闭</button>
+    </fieldset>
+</form>
+<script src="/script/foreground/foreground.js"></script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>角色列表</title>
+    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/bootstrap-table-master/dist/bootstrap-table.css">
+    <link rel="stylesheet" type="text/css" href="/style/hzitshop.css">
+    <link rel="stylesheet" type="text/css" href="/assets/themes/layui/css/layui.css">
+</head>
+<body>
+<input type="hidden" name="userId" th:value="${session.employeeInfo.userId}">
+<div id="toolbar" class="toolbar">
+    <span id="span-add" class="span-hidden"><button id="add" class="layui-btn layui-btn-small"><i class="layui-icon"></i>添加角色</button></span>
+    <span id="span-edit" class="span-hidden"><button id="edit" class=" layui-btn layui-btn-normal layui-btn-small"><i class="layui-icon"></i>修改角色</button></span>
+    <span id="span-locked" class="span-hidden"><button id="disabled" class="layui-btn layui-btn-small" style="background-color: grey;"><i class="layui-icon">ဇ</i>禁用角色</button></span>
+    <span id="span-delete" class="span-hidden"><button id="delete"
+                                                       class="layui-btn  layui-btn-small" style="background-color: purple;"><i class="layui-icon">ဇ</i>删除角色</button> </span>
+    <span id="span-grantResouce" ><button id="grantResource" class="layui-btn layui-btn-danger layui-btn-small"><i class="layui-icon"></i>权限授权</button> </span>
+</div>
+<table id="table"></table>
+<script src="/assets/js/jquery.min.js"></script>
+<script src="/assets/bootstrap/js/bootstrap.min.js"></script>
+<script src="/assets/bootstrap-table-master/dist/bootstrap-table.js"></script>
+<script src="/assets/bootstrap-table-master/dist/locale/bootstrap-table-zh-CN.js"></script>
+<script src="/assets/themes/layui/lay/dest/layui.all.js"></script>
+<script src="/script/role/index.js"></script>
+</body>
+</html>

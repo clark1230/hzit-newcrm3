@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <title>hzitshop-admin管理系统</title>
+    <meta name="keywords" content="desktop-Webos,Webos,windows-webos">
+    <meta name="description" content="">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" type="text/css" href="/assets/themes/layui/css/layui.css">
+    <link rel="stylesheet" type="text/css" href="/assets/themes/desktop/style/swiper-3.4.0.min.css">
+    <link rel="stylesheet" type="text/css" href="/assets/themes/desktop/style/desktop.css?t">
+    <meta name="baidu-site-verification" content="btBYeQVH5L"/>
+    <style>
+        .start-menu {
+            cursor: pointer;
+        }
+
+        .start-menu:hover {
+            background-color: orange;
+            border-radius: 5px;
+        }
+
+    </style>
+    
+</head>
+<body class="desktop-bg" id="fullScreen">
+
+
+<input type="hidden" id="userId" name="userId" th:value="${session.employeeInfo.userId}">
+<!--主页面刷新时出现一个刷新图标-->
+<div class="" id="loading" style="position: absolute; top: 49%; left: 50%; margin-left: -73px; display:block;"><i
+        class="layui-icon layui-anim layui-anim-rotate layui-anim-loop" style="font-size: 80px;">ဂ</i></div>
+<!--桌面app配置参数-->
+
+<!--<script src="/script/index.js"></script>-->
+
+<!--主桌面-->
+<div class="swiper-container desktop-container small-click" data-type="hidemenu">
+    <div class="swiper-pagination">
+
+    </div>
+    <div class="swiper-wrapper">
+        <!--  <div style="width:100%;height: 40px;background-color: red;">
+
+
+          </div>-->
+    </div>
+</div>
+<!--任务栏-->
+<div class="desktop-taskbar">
+    <!--div class="desktop-taskbar-pr"></div-->
+    <div id="opening-menu" class="opening-menu">
+        <div class="opening-menu-app-list"></div>
+        <div class="opening-menu-user">
+            <div class="desktop-opening-icon"></div>
+            <div class="opening-menu-user-list">
+                <a id="startMenuFullScreen" title="开启全屏" data-type="fullscreen" class="dock_tool_setting small-click"
+                   href="javascript:void(0)">开启全屏</a>
+                <a title="系统设置" data-type="setting" class="dock_tool_setting small-click"
+                   href="javascript:void(0)">系统设置</a>
+                <a title="主题设置" data-type="theme" class="dock_tool_theme small-click" href="javascript:void(0)">主题设置</a>
+                <a title="个人资料" data-type="users" class="dock_tool_ziliao small-click"
+                   href="javascript:void(0)">个人资料</a>
+                <a title="注销登录" data-type="loginout" class="dock_tool_loginout small-click" href="javascript:void(0)">注销登录</a>
+            </div>
+        </div>
+    </div>
+    <!--开始菜单-->
+    <div class="layui-inline taskbar-win small-click start-menu" data-type="openingmenu">
+        <i class="iconfont icon-windows">&#xe75e;</i>
+    </div>
+    <!---->
+    <div class="layui-inline desktop-taskbar-app-list">
+
+    </div>
+    <!--时间显示-->
+    <div class="layui-inline taskbar-time">
+        <label id="laydate-hs"></label>
+        <label id="laydate-ymd"></label>
+    </div>
+    <div class="layui-inline taskbar-showdesktop small-click " data-type="showdesktop" title="显示桌面"></div>
+</div>
+<!--右键菜单-->
+<div class="desktop-menu">
+    <ul>
+        <li><a href="javascript:;" class="small-click" data-type="fullscreen">开启全屏</a></li>
+        <li><a href="javascript:;" class="small-click" data-type="refreshwindow">刷新</a></li>
+        <!--<li><a href="javascript:;" class="small-click" data-type="exitFullScreen">退出全屏</a></li>-->
+        <hr/>
+        <li><a href="javascript:;" class="small-click" data-type="showdesktop">显示桌面</a></li>
+        <li><a href="javascript:;" class="small-click" data-type="closeall">关闭所有</a></li>
+        <li><a href="javascript:;" class="small-click" data-type="lockscreen">锁屏</a></li>
+
+        <hr/>
+        <li><a href="javascript:;" class="small-click" data-type="setting">系统设置</a></li>
+        <li><a href="javascript:;" class="small-click" data-type="theme">主题设置</a></li>
+        <li><a href="javascript:;" class="small-click" data-type="technicalsupport">技术支持</a></li>
+        <hr/>
+        <li><a href="javascript:;" class="small-click" data-type="loginout">注销</a></li>
+    </ul>
+</div>
+</body>
+<script src="/assets/js/jquery-2.0.0.js"></script>
+<script src="/assets/themes/layui/lay/dest/layui.all.js"></script>
+<script src="/assets/themes/desktop/js/swiper.js"></script>
+<script src="/assets/themes/desktop/js/jquery-ui.min.js"></script>
+<script src="/assets/layer/layer.js"></script>
+<script src="/assets/themes/desktop/js/desktop.js"></script>
+<script>
+</script>
+<script>
+    var _hmt = _hmt || [];
+
+
+    layui.use('layer', function () {
+        var layer = layui.layer, $ = layui.jquery;
+        var dz = $(".desktop-app:eq(7)");
+        layer.tips("记得点我给我点赞哦！", dz, {time: 5000});
+    });
+</script>
+<script type="text/javascript">
+    fullscreen();
+    function fullscreen() {
+        var el = document.documentElement,
+            rfs = el.requestFullScreen || el.webkitRequestFullScreen || el.mozRequestFullScreen || el.msRequestFullScreen, wscript;
+        if (typeof rfs != "undefined" && rfs) {
+            rfs.call(el);
+            return;
+        }
+        if (typeof window.ActiveXObject != "undefined") {
+            wscript = new ActiveXObject("WScript.Shell");
+            if (wscript) {
+                wscript.SendKeys("{F11}");
+            }
+        }
+    }
+</script>
+</body>
+</html>

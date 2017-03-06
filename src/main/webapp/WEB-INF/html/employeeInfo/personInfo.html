@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>个人信息</title>
+    <link rel="stylesheet" type="text/css" href="/assets/themes/layui/css/layui.css">
+</head>
+<body>
+<div style="margin: 0 auto;width:80%;">
+    <form style="margin:10px auto;" id="editEmployeeInfo" class="layui-form layui-form-pane" action="" method="post">
+        <input type="hidden" th:value="${employeeInfo.userId}" name="userId">
+        <div class="layui-form-item">
+            <label class="layui-form-label">用户名</label>
+            <div class="layui-input-block">
+                <input type="text" name="title" required="" lay-verify="name"
+                       th:value="${employeeInfo.name}"  placeholder="请输入用户名!" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item" pane="">
+            <label class="layui-form-label">性别</label>
+            <div class="layui-input-block">
+                <input type="radio" name="gender" th:checked="${employeeInfo.gender eq '1'}" value="1" title="男"><div class="layui-unselect layui-form-radio"><i class="layui-anim layui-icon"></i><span>男</span></div>
+                <input type="radio" name="gender" th:checked="${employeeInfo.gender eq '2'}" value="2" title="女" checked=""><div class="layui-unselect layui-form-radio layui-form-radioed"><i class="layui-anim layui-icon"></i><span>女</span></div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">微信号</label>
+            <div class="layui-input-block">
+                <input type="text" name="wechatNo" required="" lay-verify="wechatNo"
+                       th:value="${employeeInfo.wechatNo}"  placeholder="请输入微信号!" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">电话号码</label>
+            <div class="layui-input-block">
+                <input type="text" name="tel" required="" lay-verify="tel"
+                       th:value="${employeeInfo.tel}"  placeholder="请输入电话号码!" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <button class="layui-btn layui-btn-small" id="add" lay-submit="" lay-filter="add">保存</button>
+            <button class="layui-btn layui-btn-small layui-btn-warm" id="cancel"  >关闭</button>
+            <button class="layui-btn layui-btn-small layui-btn-danger" id="changePwd" >修改密码</button>
+        </div>
+    </form>
+
+</div>
+<script src="/assets/js/jquery.min.js"></script>
+<script src="/assets/themes/layui/lay/dest/layui.all.js"></script>
+<script src="/script/employeeInfo/personInfo.js"></script>
+</body>
+</html>

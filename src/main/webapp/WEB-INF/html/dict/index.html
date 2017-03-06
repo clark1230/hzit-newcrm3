@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="CN" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>数据字典</title>
+    <link rel="stylesheet" href="/assets/zTree/css/zTreeStyle/zTreeStyle.css">
+    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/bootstrap-table-master/dist/bootstrap-table.css">
+    <link rel="stylesheet" type="text/css" href="/assets/themes/layui/css/layui.css">
+    <style>
+        .show{
+            margin-left:50px;
+            margin-top:30px;
+            float:left;
+        }
+        .span-hidden{
+            display: none;
+        }
+    </style>
+</head>
+<body  style="background-image: url('/assets/images/bg.gif')">
+<div class="show" style="background-color: white;">
+    <input type="hidden" name="userId" th:value="${session.employeeInfo.userId}">
+    <div>
+        <span ><button type="button" id="expandAll" class="layui-btn   layui-btn-small">全部展开</button></span>
+        <span ><button type="button" id="unExpandAll" class="layui-btn layui-btn-warm  layui-btn-small">全部折叠</button></span>
+        <span ><button type="button" id="unChecked" class="layui-btn layui-btn-primary layui-btn-small">取消勾选</button></span>
+        <span id="span-add" class="span-hidden"><button type="button" id="add" class="layui-btn  layui-btn-small" style="background-color: purple">添加节点</button></span>
+        <span id="span-edit" class="span-hidden"><button type="button" id="edit" class="layui-btn  layui-btn-small" style="background-color: green;">修改节点</button></span>
+        <span id="span-delete" class="span-hidden"><button type="button" id="delete" class="layui-btn  layui-btn-small" style="background-color: orange;">删除节点</button></span>
+    </div>
+    <div >
+        <ul id="treeDemo" class="ztree" style="color:white;font-size:20px;">
+        </ul>
+        <input type="hidden" value="" id="pId" name="pId">
+        <input type="hidden" value="" id="id" name="id">
+        <input type="hidden" value="" id="name" name="name">
+    </div>
+</div>
+<script src="/assets/js/jquery-2.0.0.min.js"></script>
+<script src="/assets/zTree/js/jquery.ztree.all.min.js"></script>
+<script src="/assets/themes/layui/lay/dest/layui.all.js"></script>
+<script src="/script/dict/index.js"></script>
+</body>
+</html>

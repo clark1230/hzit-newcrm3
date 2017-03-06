@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>学员进班</title>
+    <link rel="stylesheet" type="text/css" href="/assets/themes/layui/css/layui.css">
+    <link rel="stylesheet" href="/assets/My97DatePicker/skin/twoer/datepicker.css">
+</head>
+<body>
+<div style="width:80%;margin:10px auto;">
+    <form id="enterClassForm" class="layui-form " method="post">
+        <input type="hidden" name="customerId">
+
+        <div class="layui-form-item" style="text-align: left;">
+            <label class="layui-form-label label-font">学员姓名<i style="color:orange;" class="layui-icon"></i></label>
+            <div class="layui-input-block">
+                <input name="studentName" lay-verify="realName" id="name" autocomplete="off"
+                       placeholder="请输入学员姓名!" class="layui-input required" type="text">
+            </div>
+        </div>
+
+        <div class="layui-form-item" style="text-align: left;">
+            <label class="layui-form-label label-font">班级<i style="color:orange;" class="layui-icon"></i></label>
+            <div class="layui-input-block">
+                <select name="stedentClass" lay-search  lay-verify="stedentClass">
+                    <option value="">请选择班级!</option>
+                    <option th:each="classinfo,classinfoStat:${classinfoList}"
+                            th:text="${classinfo.classname}" th:value="${classinfo.classId}"></option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item" style="text-align: left;">
+            <label class="layui-form-label label-font">贷款类型<i style="color:orange;" class="layui-icon"></i></label>
+            <div class="layui-input-block">
+                <select name="studentStatus" lay-filter="studentStatus" lay-verify="studentStatus">
+                    <option value="">请选择贷款类型!</option>
+                    <option th:each="tbDict,tbDictStat:${tbDictList}"
+                            th:text="${tbDict.name}" th:value="${tbDict.name}"></option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item" style="text-align: left;">
+            <label class="layui-form-label label-font">日期<i style="color:orange;" class="layui-icon"></i></label>
+            <div class="layui-input-block">
+                <input name="studentintime" lay-verify="required" id="studentintime" autocomplete="off"
+                       onClick="WdatePicker({skin:'twoer'})"   placeholder="请选择贷款日期!(2017-1-1)" class="layui-input required" type="text">
+            </div>
+        </div>
+        <div class="layui-form-item" style="text-align: left;">
+            <label class="layui-form-label label-font">备注</label>
+            <div class="layui-input-block">
+                <!--<input name="studentdes"  id="studentdes" autocomplete="off"
+                       placeholder="请输入备注!" class="layui-input required" type="text">-->
+                <textarea th:inline="text" name="studentdes" placeholder="请输入描述!" class="layui-textarea"></textarea>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label label-font"></label>
+            <input id="add" type="button" class="layui-btn layui-btn-small" lay-submit="" lay-filter="add" value="进班">
+            <input type="reset" class="layui-btn layui-btn-danger layui-btn-small" value="重置">
+            <input type="button" id="close" class="layui-btn layui-btn-warm layui-btn-small" value="关闭"/>
+        </div>
+    </form>
+</div>
+ <script src="/assets/js/jquery-2.0.0.js"></script>
+ <script src="/assets/My97DatePicker/WdatePicker.js"></script>
+ <script src="/assets/themes/layui/lay/dest/layui.all.js"></script>
+<script>
+    $(function(){
+        //数据回显
+        $("input[name='customerId']").val($("input[name='customerId']",parent.document).val());
+        $("input[name='studentName']").val($("input[name='studentName']",parent.document).val());
+        var index = parent.layer.getFrameIndex(window.name); //获取当前窗体索引
+         $("#close").click(function(){
+             parent.layer.close(index);
+         });
+        layui.use(['layer','form', 'layedit'], function () {
+            var form = layui.form()
+                , layer = layui.layer
+                , layedit = layui.layedit
+            form.on('select(customerState)', function(data) {
+                if(data.value==34){
+                    layer.alert('注意，选择为<span style="color:red;">已流失</span>，会导致该数据从您的列表中消失，请慎重操作!');
+                }
+            });
+            //创建一个编辑器
+            var editIndex = layedit.build('LAY_demo_editor');
+            //自定义验证规则
+            form.verify({
+                realName: function (value) {
+                    if (value.length == 0) {
+                        return '请输入学员名称!';
+                    }
+                },studentintime:function(value){
+                        if(value=''){
+                            return '请选择日期!';
+                        }
+                },studentStatus:function(value){
+                       if(value==''){
+                           return "请选择贷款类型!";
+                       }
+                },stedentClass:function(value){
+                    if(value==''){
+                        return '请选择班级!';
+                    }
+                }, introducer: function (value) {
+                    if (value == '') {
+                        return '请选择邀约人!';
+                    }
+                }
+                , content: function (value) {
+                    layedit.sync(editIndex);
+                }
+            });
+            //监听提交
+            form.on('submit(add)', function (data) {
+                //loading层
+                var index2 = layer.load(1,{time:15*1000},{
+                    shade: [0.1, '#fff'] //0.1透明度的白色背景
+                });
+                //校验表单
+                //提交表单
+                $.ajax({
+                    type: 'post',
+                    url: '/customerInfo/enterClass',
+                    data: $('#enterClassForm').serialize(),
+                    success: function (result) {
+                        if (result.code == 200) {
+                            layer.close(index2); //关闭当前弹层
+                            layer.msg(result.msg);
+                            setTimeout(function () {
+                                parent.layer.close(index);//关闭层
+                            }, 1000);
+                        } else {
+                            layer.msg(result.msg);
+                            layer.close(index2); //关闭当前弹层
+                        }
+                    },error:function(result){
+                            layer.close(index2);
+                            layer.msg('矮油，出错啦!');
+                    }
+                });
+
+            });
+        });
+        /*$("#add").click(function(){
+            $.post('/studentInfo/enterClass',$('#enterClassForm').serialize(),function(result){
+                if (result.code == 200) {
+                   // layer.close(index2); //关闭当前弹层
+                    layer.msg(result.msg);
+                    setTimeout(function () {
+                        parent.layer.close(index);//关闭层
+                    }, 1000);
+                } else {
+                    layer.msg(result.msg);
+                   // layer.close(index2); //关闭当前弹层
+                }
+            });
+        });*/
+    });
+</script>
+</body>
+</html>

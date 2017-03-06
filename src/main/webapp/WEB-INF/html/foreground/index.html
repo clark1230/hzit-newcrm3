@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="CN" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>前台首页</title>
+    <meta name="description" content="这是一个 index 页面">
+    <meta name="keywords" content="index">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta name="apple-mobile-web-app-title" content="Amaze UI" />
+    <link rel="stylesheet" href="/assets/amazeui/css/amazeui.min.css" />
+    <link rel="stylesheet" href="/assets/amazeui/css/amazeui.datatables.min.css" />
+    <link rel="stylesheet" href="/assets/amazeui/css/app.css">
+    <script src="/assets/amazeui/js/jquery.min.js"></script>
+</head>
+<body data-type="widgets" style="background-color: white;">
+<script src="/assets/amazeui/js/theme.js"></script>
+<input type="hidden" name="userId" th:value="${session.employeeInfo.userId}">
+<!--<div class="am-g tpl-g">-->
+    <!-- 内容区域 -->
+   <!-- <div class="tpl-content-wrapper" style="background-color: lightgray;">-->
+        <div class="row-content am-cf" style="background-color: lightgrey">
+            <div class="row">
+                <div class="am-u-sm-12 am-u-md-12 am-u-lg-5" style="display: none;" id="addCustomerInfoDiv">
+                    <div class="widget am-cf">
+                        <div class="widget-head am-cf">
+                            <div class="widget-title am-fl am-icon-home page-header-heading-icon">
+                                应聘者信息录入
+                            </div>
+                            <div class="widget-function am-fr">
+                                <a href="javascript:;" class="am-icon-cog"></a>
+                            </div>
+                        </div>
+                        <input type="hidden" name="" id='hiddenUserId' value=""/>
+                        <input type="hidden" name="companyId2" th:value="${session.employeeInfo.companyId}">
+                        <div class="widget-body  widget-body-lg am-fr">
+                            <form class="am-form addCustomerForm" id="addCustomerForm" method="post" >
+                                <input type="hidden" name="companyId" th:value="${session.employeeInfo.companyId}">
+                                <fieldset>
+                                    <div class="am-form-group">
+                                        <label for="realName">应聘者姓名:</label>
+                                        <input type="text" name="realName" class="am-form-field am-radius" id="realName" placeholder="请输入应聘者姓名!"
+                                               required="required"  >
+                                    </div>
+
+                                    <div class="am-form-group">
+                                        <label for="tel">电话号码:</label>
+                                        <input type="text" name="tel" class="am-form-field am-radius" id="tel" placeholder="请输入电话号码!" required="required">
+                                    </div>
+                                    <div class="am-form-group">
+                                        <label for="userId">咨询师:</label>
+                                        <select  name="userId" id="userId" required>
+                                            <option value="-1">****************请选择所属咨询师****************</option>
+                                        </select>
+                                        <span class="am-form-caret"></span>
+                                    </div>
+                                    <div class="am-form-group">
+                                        <button type="button" id="btnAddCustomer" class="am-btn am-btn-primary am-icon-drupal am-radius am-btn-xs">录入</button>
+                                        <button type="reset" class="am-btn am-btn-warning am-icon-warning am-radius am-btn-xs">重置</button>
+                                        <button type="button" id="btnRefresh" class="am-btn  am-icon-refresh am-radius am-btn-xs" style="background-color:green;color:white;">刷新</button>
+                                    </div>
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="am-u-sm-12 am-u-md-12 am-u-lg-12" id="showCustomerInfo">
+                    <div class="widget am-cf">
+                        <div class="widget-head am-cf">
+                            <span style="color:orange;">请选择校区:</span>
+                            <select id="changeCompanySelect" name="companyId" style="width:230px;">
+                                <option th:each="tbDict,tbDictStat:${tbDictList}"
+                                        th:selected="${tbDict.id==session.employeeInfo.companyId}"
+                                        th:text="${tbDict.name}" th:value="${tbDict.id}"></option>
+                            </select>
+                            <div class="widget-title am-fl" id="showCustomerInfoNum">应聘者等待列表</div>
+                                 <div class="widget-function am-fr">
+                                <a href="javascript:;" class="am-icon-cog"></a>
+                            </div>
+                        </div>
+                        <div class="widget-body  widget-body-lg am-fr">
+                            <input type="hidden" id="hiddenIframeCloseState" value="2">
+                            <input type="hidden" id="hiddenIframeCustomerId">
+
+                            <ul  id="customerWaitList" class="am-list">
+                                     <li>等待</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+   <!-- </div>-->
+<!--</div>-->
+<!--</div>-->
+<div data-am-widget="gotop" class="am-gotop am-gotop-default" >
+    <a href="#top" title="回到顶部">
+        <span class="am-gotop-title">回到顶部</span>
+        <i class="am-gotop-icon am-icon-chevron-up"></i>
+    </a>
+</div>
+<script src="/assets/amazeui/js/amazeui.min.js"></script>
+<script src="/assets/amazeui/js/amazeui.datatables.min.js"></script>
+<script src="/assets/amazeui/js/dataTables.responsive.min.js"></script>
+<script src="/assets/amazeui/js/app.js"></script>
+<script src="/assets/layer/layer.js"></script>
+<script src="/script/foreground/index.js"></script>
+</body>
+</html>

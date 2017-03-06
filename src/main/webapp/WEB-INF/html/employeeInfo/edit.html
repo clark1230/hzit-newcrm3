@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>修改用户</title>
+    <link rel="stylesheet" type="text/css" href="/assets/themes/layui/css/layui.css">
+</head>
+<body>
+<div style="margin:20px auto;width:70%;">
+
+    <form id="editCustomerInfoForm" class="layui-form " method="post">
+        <input type="hidden" th:value="${employeeInfo.userId}" name="userId">
+        <div class="layui-form-item" style="text-align: left;">
+            <label class="layui-form-label label-font">用户名称<i style="color:orange;" class="layui-icon"></i></label>
+            <div class="layui-input-block">
+                <input name="name" lay-verify="name" id="name" autocomplete="off"
+                     th:value="${employeeInfo.name}"  placeholder="请输入用户名称!" class="layui-input required" type="text">
+            </div>
+        </div>
+        <div class="layui-form-item" style="text-align: left;">
+            <label class="layui-form-label label-font">性别<i style="color:orange;" class="layui-icon"></i></label>
+            <div class="layui-input-block">
+                <div class="ayui-input-block">
+                    <input type="radio" name="gender" th:checked="${employeeInfo.gender eq '1'}" value="1" title="男">
+                    <div class="layui-unselect layui-form-radio">
+                    <i class="layui-anim layui-icon"></i><span>男</span></div>
+                    <input type="radio" name="gender" th:checked="${employeeInfo.gender eq '2'}" value="2" title="女" checked="">
+                    <div class="layui-unselect layui-form-radio layui-form-radioed"><i class="layui-anim layui-icon">
+                    </i><span>女</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item" style="text-align: left;">
+            <label class="layui-form-label label-font">手机号<i style="color:orange;" class="layui-icon"></i></label>
+            <div class="layui-input-block">
+                <input name="tel"  placeholder="请输入手机号码!" autocomplete="off"
+                      th:value="${employeeInfo.tel}" class="layui-input" type="text">
+            </div>
+        </div>
+        <div class="layui-form-item" style="text-align: left;">
+            <label class="layui-form-label label-font">邮箱<i style="color:orange;" class="layui-icon"></i></label>
+            <div class="layui-input-block">
+                <input name="email"  lay-verify="email" placeholder="请输入邮箱!" autocomplete="off"
+                       th:value="${employeeInfo.email}" class="layui-input" type="email">
+            </div>
+        </div>
+        <div class="layui-form-item" style="text-align: left;">
+            <label class="layui-form-label label-font">微信号</label>
+            <div class="layui-input-block">
+                <input name="wechatNo" placeholder="请输入微信号!" th:value="${employeeInfo.wechatNo}" autocomplete="off" class="layui-input" type="text">
+            </div>
+        </div>
+        <div class="layui-form-item" style="text-align: left;">
+            <label class="layui-form-label">所在公司<i style="color:orange;" class="layui-icon"></i></label>
+            <div class="layui-input-block">
+                <select name="companyId" lay-verify="companyId">
+                    <option value="">请选择公司!</option>
+                    <option th:each="tbDict,tbDictStat:${tbDictList}"
+                            th:text="${tbDict.name}" th:value="${tbDict.id}"></option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item" style="text-align: left;">
+            <label class="layui-form-label">所在部门<i style="color:orange;" class="layui-icon"></i></label>
+            <div class="layui-input-block">
+                <select name="deptId" lay-verify="targetSkill">
+                    <option value="">请选择部门!</option>
+                    <option th:each="tbDict,tbDictStat:${tbDictList}"
+                            th:text="${tbDict.name}" th:value="${tbDict.id}"></option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item" style="text-align: left;">
+            <label class="layui-form-label label-font">咨询师<i style="color:orange;" class="layui-icon"></i></label>
+            <div class="layui-input-block">
+                <div class="ayui-input-block">
+                    <input name="isConsultant" th:checked="${employeeInfo.isConsultant eq '1'}" value="1" lay-verify="gender" title="是"  type="radio">
+                    <input name="isConsultant" th:checked="${employeeInfo.isConsultant eq '0'}" value="0" lay-verify="gender" title="否" checked type="radio">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label label-font">操作</label>
+            <input id="edit" type="button" class="layui-btn layui-btn-small" lay-submit="" lay-filter="edit" value="保存">
+            <input type="reset" class="layui-btn layui-btn-danger layui-btn-small" value="重置">
+            <input type="button" id="cancel" class="layui-btn layui-btn-warm layui-btn-small" value="关闭"/>
+        </div>
+    </form>
+</div>
+<script src="/assets/js/jquery.min.js"></script>
+<script src="/assets/themes/layui/lay/dest/layui.all.js"></script>
+<script src="/script/employeeInfo/edit.js"></script>
+</body>
+</html>

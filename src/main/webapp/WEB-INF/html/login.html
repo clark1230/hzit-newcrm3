@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <title>合众艾特咨询系统登录</title>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+    <!-- CSS -->
+    <link rel="stylesheet" href="/assets/login/reset.css">
+    <link rel="stylesheet" href="/assets/login/supersized.css">
+    <link rel="stylesheet" href="/assets/login/style.css"/>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <script src="/assets/login/html5shiv.js"></script>
+
+    <![endif]-->
+    <style>
+        canvas{position: fixed; top: 0px; left: 0px; }
+    </style>
+</head>
+
+<body id="body">
+<script src='/script/login.js'></script>
+<div class="page-container">
+    <h1>系统登录</h1>
+    <form id="_form" action="" method="post">
+        <input type="text" name="name" id="name" class="myForm" value="冼耀基" placeholder="请输入您的用户名!">
+        <input type="password" name="password" id="password" class="myForm" value="Xyj123016" placeholder="请输入您的密码!">
+        <span style="height:42px;">
+            <!--<input type="text" name="validateCode" id="validateCode" style="width:125px;vertical-align:middle;" class="btnValidate" placeholder="请输入验证码!">-->
+            <!--<img src="/account/captcha" id="validateCodeImg" onclick="this.src = '/account/captcha?v=' + Math.random()" style="width:100px;height: 42px;margin-top:25px;padding: 0 15px;vertical-align:middle;"/>-->
+        </span>
+        <button type="button" id="login">登录</button>
+        <button type="reset" id="wechat" class="register">重置</button>
+        <div class="connect" >
+            <p>有问题请发邮件至</p>
+            <p>xianyaoji@hzitxx.com</p>
+        </div>
+        <div class="error"><span>+</span></div>
+    </form>
+</div>
+<!-- Javascript -->
+<script src="/assets/login/jquery1.8.3.min.js"></script>
+<script src="/assets/login/MD5.js"></script>
+<script src="/assets/login/supersized.3.2.7.min.js"></script>
+<script src="/assets/login/supersized-init.js"></script>
+<script src="/assets/layer/layer.js"></script>
+<script >
+    jQuery(document).ready(function() {
+        //页面加载时，禁用登录按钮
+        var validateCodeState =  false;
+        try{
+            var _href = window.location.href+"";
+            if(_href && _href.indexOf('?kickout')!=-1){
+                layer.msg('您已经被踢出，请重新登录！');
+            }
+        }catch(e){
+
+        }
+       /* var $validateCode = $("#validateCode");
+        $validateCode.mouseout(function () {
+            //验证码校验
+            //获取验证码信息
+            var $validateCode = $("#validateCode");
+            if($validateCode.val()==''){
+                $('.error').fadeOut('fast', function(){
+                    $('.error').css('top', '160px').show();
+                });
+                $('.error').fadeIn('fast', function(){
+                    $('#validateCode').focus();
+                });
+                return false;
+            }
+            //异步发验证码信息发到服务器
+            $.get('/account/checkValidate?validateCode='+$validateCode.val(),function(data){
+                if(data.status == 200){
+                    if(data.message == 'true'){
+                        layer.msg('验证码正确!');
+                        //按钮恢复
+                        $("#login").removeAttr("disabled");
+                        $("#login").removeClass('btnDisabled');
+                        $('.error').css('top', '170px').hide();
+                        //$('#validateCode').attr('readonly','readonly');
+                        validateCodeState = true;
+                    } else if(data.message =='false'){
+                        //重新获取验证码
+                        // /account/captcha?v=' + Math.random()
+                        $("#validateCodeImg").attr('src','/account/captcha?v=' + Math.random());
+                        layer.msg('验证码不正确!');
+                        return false;
+                    }else if (data.message=='notnull'){
+                        layer.msg('验证码不能为空!');
+                    }
+                }
+
+            });
+        });*/
+        //回车事件绑定
+        document.onkeydown=function(event){
+            var e = event || window.event || arguments.callee.caller.arguments[0];
+            if(e && e.keyCode==13){
+                $('#login').click();
+            }
+        };
+
+        //登录操作
+        $('#login').click(function(){
+            var username = $('#name').val();
+            var password = $('#password').val();
+            var validateCode  = $('#validateCode').val();
+            if(username == '') {
+                $('.error').fadeOut('fast', function(){
+                    $('.error').css('top', '27px').show();
+                });
+                $('.error').fadeIn('fast', function(){
+                    $('#name').focus();
+                });
+                return false;
+            }
+            if(password == '') {
+                $('.error').fadeOut('fast', function(){
+                    $('.error').css('top', '96px').show();
+                });
+                $(this).find('.error').fadeIn('fast', function(){
+                    $('#password').focus();
+                });
+                return false;
+            }
+            /**
+             * 验证验证
+            /*if(validateCode == ''){
+                return false;
+            }*/
+           /* if(validateCodeState == false){
+                return false;
+            }*/
+            var pswd = MD5("hzit#" + password),
+                data = {password:pswd,name:$('#name').val(),rememberMe:$("#rememberMe").is(':checked')};
+            var load = layer.load();
+            $.post("/account/login",data,function(result){
+                layer.close(load);
+                if(result && result.status != 200){
+                    layer.msg(result.message,function(){});
+                    $('.password').val('');
+                    return;
+                }else{
+                    layer.msg('登录成功！');
+                    setTimeout(function(){
+                        //登录返回
+                        window.location.href= "/index";
+                    },100);
+                }
+            },"json");
+
+        });
+        $('.page-container form .username, .page-container form .password').keyup(function(){
+            $(this).parent().find('.error').fadeOut('fast');
+        });
+        //微信登录
+        $("#register").click(function(){
+            window.location.href="#";
+        });
+    });
+</script>
+</body>
+</html>
+

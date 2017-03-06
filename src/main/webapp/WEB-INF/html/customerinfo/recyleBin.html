@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>回收站</title>
+    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/bootstrap-table-master/dist/bootstrap-table.css">
+    <link rel="stylesheet" type="text/css" href="/assets/themes/layui/css/layui.css">
+    <link rel="stylesheet" type="text/css" href="/style/hzitshop.css">
+</head>
+<body>
+<input type="hidden" name="isConsultant" th:value="${session.employeeInfo.isConsultant}">
+<input type="hidden" name="companyId" th:value="${session.employeeInfo.companyId}">
+<input type="hidden" name="userId" th:value="${session.employeeInfo.userId}">
+<!--学员进班 start-->
+<input type="hidden" name="customerId">
+<input type="hidden" name="studentName">
+<div id="toolbar" style="margin-left: 10px;font-size: 17px;">
+    <span id="span-remove"><button id="delete" class="layui-btn layui-btn-danger  layui-btn-small "><i
+            class="layui-icon">&#xe640;</i>彻底删除</button></span>
+    <span id="span-follow"><button id="recover" class="layui-btn  layui-btn-small " style="background-color: orange;">
+        <i class="layui-icon"></i>恢复数据</button></span>
+    <form class="form-inline" style="display: inline-block;">
+        <select class="form-control" style="width:140px;" id="searchParam">
+            <option value="-1">请选择搜索条件!</option>
+            <option value="real_name">学员姓名</option>
+            <option value="age">年龄</option>
+            <option value="tel">电话号码</option>
+            <option value="native_place">籍贯</option>
+            <option value="wechat_no">微信号</option>
+            <option value="qq">qq号</option>
+            <option value="graduate_time">毕业时间</option>
+            <option value="graduate_from">毕业学校</option>
+            <option value="major_in">专业</option>
+        </select>
+        <input type="text" class="form-control" id="searchValue" placeholder="请输入搜索值!">
+    </form>
+    <span><button id="searchCustomerInfo" class="layui-btn layui-btn-normal layui-btn-small "><i
+            class="layui-icon">&#xe615;</i>搜索</button></span>
+    <span><button id="searchRefresh" class="layui-btn layui-btn-danger layui-btn-small toolbar-refresh"><i
+            class="layui-icon">&#xe63d;</i>刷新</button></span>
+    <span><button id="multiSearch" class="layui-btn layui-btn-warm layui-btn-small "><i
+            class="layui-icon">&#xe615;</i>高级搜索</button></span>
+</div>
+<table id="table">
+</table>
+<script src="/assets/js/jquery.min.js"></script>
+<script src="/assets/bootstrap/js/bootstrap.min.js"></script>
+<script src="/assets/bootstrap-table-master/dist/bootstrap-table.js"></script>
+<script src="/assets/bootstrap-table-master/dist/locale/bootstrap-table-zh-CN.js"></script>
+<script src="/assets/themes/layui/lay/dest/layui.all.js"></script>
+<script src="/script/customerinfo/recyleBin.js"></script>
+</body>
+</html>

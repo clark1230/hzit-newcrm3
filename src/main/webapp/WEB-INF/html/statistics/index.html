@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>数据统计</title>
+    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/My97DatePicker/skin/twoer/datepicker.css">
+    <script src="/assets/js/jquery-2.0.0.min.js"></script>
+    <script src="/assets/layer/layer.js"></script>
+    <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/assets/My97DatePicker/WdatePicker.js"></script>
+    <script src="/assets/echarts/echarts.min.js"></script>
+    <script src="/script/statistics/index.js"></script>
+</head>
+<body>
+<input type="hidden" name="companyId" th:value="${session.employeeInfo.companyId}">
+   <div style="margin-top:20px;margin-left: 50px;margin-bottom: 20px;" >
+       <form class="form-inline" style="display: inline-block;">
+           <!--获取公司信息-->
+           <select name="company" class="form-control" style="width:240px;" >
+               <option value="-1">请选择分校区!</option>
+               <option th:each="tbDict,tbDictStat:${tbDictList}"
+                       th:text="${tbDict.name}" th:value="${tbDict.id}"></option>
+           </select>
+           <input id="month"  class="form-control twoer" style="width:200px;font-size: 16px;"
+                  onClick="WdatePicker({skin:'twoer',dateFmt:'yyyy-MM',onpicked:function(){
+                     $('#search').click();
+                  }})"
+                   type="text" placeholder="请选择时间!">
+           <!--学员状态-->
+          <!-- <select class="form-control" style="width:240px;" >
+               <option value="-1">请选择学员状态!</option>
+               <option th:each="customerState,customerStateStat:${customerStateList}"
+                       th:text="${customerState.name}" th:value="${customerState.id}"></option>
+
+           </select>-->
+           <input style="display: none;" type="button" class="form-control" id="search" value="获取数据">
+       </form>
+   </div>
+<div style="margin-left:50px;width:50%;height:500px;" id="showCompanyCount">
+
+</div>
+
+</body>
+</html>

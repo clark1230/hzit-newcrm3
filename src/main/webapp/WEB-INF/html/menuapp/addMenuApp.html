@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加模块</title>
+    <link rel="stylesheet" type="text/css" href="/assets/themes/layui/css/layui.css">
+    <link rel="stylesheet" href="/assets/themes/layui/css/modules/laydate/laydate.css">
+    <link rel="stylesheet" href="/assets/colorpicker/colorpicker.css">
+</head>
+<body>
+<form id="addMenuAppForm"  class="layui-form layui-form-pane" action="/menuApp/addMenuApp" method="post">
+    <div class="layui-form-item">
+        <label class="layui-form-label">app编号</label>
+        <div class="layui-input-block">
+            <input name="appid" lay-verify="required" placeholder="请输入app编号" autocomplete="off" class="layui-input"
+                   type="text">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">图标</label>
+        <div class="layui-input-block">
+            <input name="icon" lay-verify="required" placeholder="请选择图标!" autocomplete="off" class="layui-input"
+                   type="text">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">图标背景色</label>
+        <div class="layui-input-block">
+            <input name="iconbg"    value="#123456" class="layui-input" type="text">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">模块名称</label>
+        <div class="layui-input-block">
+            <input name="name" lay-verify="required" placeholder="请输入模块名称!" autocomplete="off" class="layui-input"
+                   type="text">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">地址</label>
+        <div class="layui-input-block">
+            <input name="url" lay-verify="required" placeholder="请输入地址!" autocomplete="off" class="layui-input"
+                   type="text">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">窗体高度</label>
+        <div class="layui-input-block">
+            <input name="width" lay-verify="required" placeholder="请输入窗体高度!" autocomplete="off" class="layui-input"
+                   type="text">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">窗体宽度</label>
+        <div class="layui-input-block">
+            <input name="height" lay-verify="required" placeholder="请输入窗体宽度!" autocomplete="off" class="layui-input"
+                   type="text">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">目标</label>
+        <div class="layui-input-block">
+            <input name="target" lay-verify="required" placeholder="请输入目标!" autocomplete="off" class="layui-input"
+                   type="text">
+        </div>
+    </div>
+
+    <div class="" style="margin-left:120px;">
+        <input type="button" id="add" class="layui-btn layui-btn-small" value="保存">
+        <input type="button" id="cancel" class="layui-btn layui-btn-warm layui-btn-small" value="取消">
+    </div>
+</form>
+
+<script src="/assets/themes/layui/lay/dest/layui.all.js"></script>
+<script src="/assets/colorpicker/jquery.js"></script>
+<script src="/assets/colorpicker/colorpicker.js"></script>
+<script src="/script/menuapp/addMenuApp.js"></script>
+</body>
+</html>

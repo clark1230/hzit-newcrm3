@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>授权页面</title>
+    <link rel="stylesheet" href="/assets/checkbox/css/jquery-labelauty.css">
+    <style>
+        h1 {
+            font-size: 20px;
+        }
+
+        dd {
+            margin-left: 50px;
+        }
+
+        dl {
+            margin-left: 20px;
+        }
+        ul{
+            list-style: none;
+        }
+        div input{
+            float:left;
+        }
+
+        /*li{
+            width:100%;
+            height:40px;
+            //background-color: orange;
+        }*/
+        /*ul { list-style-type: none;}
+        li { display: inline-block;}
+        //li { margin: 10px 0;}*/
+        /*input.labelauty + label { font: 12px "Microsoft Yahei";}*/
+        .permission li{
+            float: left;
+        }
+        .p1>li{
+            width:100%;
+            height:80px;
+        }
+        .p1>li>input{
+            width:200px;
+        }
+        .p1>li>span{
+            background-color: orange;
+            display: block;
+            width:200px;
+            height:30px;
+            border-radius: 5px;
+            text-align: center;
+            line-height: 30px;
+            color: white;
+        }
+        body{
+            background-color: #d67a9f;
+        }
+        .btn{
+            width:100px;
+            height:40px;
+            background-color: orange;
+            border-radius: 5px;
+            text-align: center;
+            color:white;
+            line-height: 40px;
+            float: left;
+            cursor:pointer;
+        }
+        .operate{
+
+            margin-left: 100px;
+        }
+    </style>
+</head>
+<body>
+<form action="" method="post">
+    <div class="">
+        <ul id="resourceUl" class="dowebok p1">
+        </ul>
+    </div>
+    <div class="operate">
+        <div class="btn">确定</div>
+        <div class="btn" style="background-color: green;">取消</div>
+    </div>
+</form>
+
+<script src="/assets/checkbox/js/jquery-1.8.3.min.js"></script>
+<script src="/assets/checkbox/js/jquery-labelauty.js"></script>
+<script>
+
+    $(function () {
+       /* $(function(){
+            $(':input').labelauty();
+        });*/
+
+        //页面加载异步获取数据
+        var $resourceDl = $("#resourceUl");
+        $.get('/permission/resource', function (result) {
+            console.log(result);
+            $.each(result, function (item) {
+                //拼接
+                var li = $("<li style='margin-top: 5px;margin-buttom:5px;' ><input type='checkbox' name='menuApp' data-labelauty='"+ result[item].name + "'</input></li>");
+                var div = $("<ul class='permission'></ul>");
+                if (result[item].length != 0) {
+                    //console.log("-------");
+                    $.each(result[item].tbMenuAppDescList, function (index) {
+                        var checkbox = $("" +
+                            "<li style='margin-left: 10px;'><input type='checkbox' name='permission' data-labelauty='"+result[item].tbMenuAppDescList[index].name+"'></input></li>");
+                        div.append(checkbox);
+                    });
+                }
+                li.append(div);
+                $resourceDl.append(li);
+
+            });
+            $(function(){
+                $(':input').labelauty();
+            });
+        });
+
+        $("#btn").click(function () {
+            //获取
+            var genderArr = $(":checkbox:checked");
+            $.each(genderArr, function (item) {
+                console.log(genderArr[item].value);
+
+            });
+        });
+    });
+</script>
+</body>
+</html>

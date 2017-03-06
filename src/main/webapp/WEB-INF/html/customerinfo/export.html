@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>报表导出</title>
+    <link rel="stylesheet" type="text/css" href="/assets/themes/layui/css/layui.css">
+</head>
+<body>
+  <h1>报表导出</h1>
+ <h1 style="color:orange;">亲，该功能正在开发中!!</h1>
+
+  <select name="test">
+      <option value="哈哈">哈哈</option>
+      <option value="呜呜">呜呜</option>
+      
+  </select>
+  <script src="/assets/js/jquery-2.0.0.min.js"></script>
+  <script src="/assets/themes/layui/lay/dest/layui.all.js"></script>
+  <script>
+      $(function(){
+          layui.use(['form'],function(){
+             var form = layui.form();
+             form.on('select("test")',function(data){
+                alert('Hello');
+             });
+          });
+      });
+  </script>
+</body>
+</html>

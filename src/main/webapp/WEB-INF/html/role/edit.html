@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>编辑角色</title>
+    <link rel="stylesheet" type="text/css" href="/assets/themes/layui/css/layui.css">
+</head>
+<body>
+<div style="margin:20px auto;width:80%;">
+    <form id="editRoleForm" class="layui-form " method="post">
+        <input type="hidden" name="userId" th:value="${session.employeeInfo.userId}">
+        <input type="hidden" name="id" th:value="${tbRole.id}">
+        <div class="layui-form-item" style="text-align: left;">
+            <label class="layui-form-label label-font">角色名称<i style="color:orange;" class="layui-icon"></i></label>
+            <div class="layui-input-block">
+                <input name="role" lay-verify="required" id="role" autocomplete="off"
+                     th:value="${tbRole.role}"  placeholder="请输入角色名称!" class="layui-input required" type="text">
+            </div>
+        </div>
+        <div class="layui-form-item" style="text-align: left;">
+            <label class="layui-form-label label-font">描述</label>
+            <div class="layui-input-block">
+                <textarea th:inline="text" name="description" placeholder="请输入角色描述!"
+                          class="layui-textarea">[[${tbRole.description}]]</textarea>
+            </div>
+        </div>
+        <div class="layui-form-item" style="text-align: left;">
+            <label class="layui-form-label label-font">描述</label>
+            <div class="layui-input-block">
+                <input type="radio" th:checked="${tbRole.available==1}" name="available" value="1" title="启用">
+                <input type="radio" th:checked="${tbRole.available==0}" name="available" value="0" title="禁用" checked>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label label-font"></label>
+            <input id="add" type="button" class="layui-btn layui-btn-small" lay-submit="" lay-filter="edit" value="保存">
+            <input type="reset" class="layui-btn layui-btn-danger layui-btn-small" value="重置">
+            <input type="button" id="cancel" class="layui-btn layui-btn-warm layui-btn-small" value="关闭"/>
+        </div>
+    </form>
+</div>
+
+<script src="/assets/js/jquery.min.js"></script>
+<script src="/assets/themes/layui/lay/dest/layui.all.js"></script>
+<script src="/script/role/edit.js"></script>
+</body>
+</html>

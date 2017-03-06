@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>添加用户</title>
+    <link rel="stylesheet" type="text/css" href="/assets/themes/layui/css/layui.css">
+</head>
+<body>
+<div style="margin:20px auto;width:70%;">
+    <form id="addCustomerInfoForm" class="layui-form " method="post">
+        <div class="layui-form-item" style="text-align: left;">
+            <label class="layui-form-label label-font">用户名称<i style="color:orange;" class="layui-icon"></i></label>
+            <div class="layui-input-block">
+                <input name="name" lay-verify="name" id="name" autocomplete="off"
+                       placeholder="请输入用户名称!" class="layui-input required" type="text">
+            </div>
+        </div>
+        <div class="layui-form-item" style="text-align: left;">
+            <label class="layui-form-label label-font">性别<i style="color:orange;" class="layui-icon"></i></label>
+            <div class="layui-input-block">
+                <div class="ayui-input-block">
+                    <input name="gender" value="1" lay-verify="gender" title="男" checked type="radio">
+                    <input name="gender" value="2" lay-verify="gender" title="女" type="radio">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item" style="text-align: left;">
+            <label class="layui-form-label label-font">手机号</label>
+            <div class="layui-input-block">
+                <input name="tel"   placeholder="请输入手机号码!" autocomplete="off"
+                       class="layui-input"
+                       type="text">
+            </div>
+        </div>
+        <div class="layui-form-item" style="text-align: left;">
+            <label class="layui-form-label label-font">企业邮箱<i style="color:orange;" class="layui-icon"></i></label>
+            <div class="layui-input-block">
+                <input name="email"  lay-verify="email" placeholder="请输入企业邮箱!" autocomplete="off"
+                       class="layui-input" type="email">
+            </div>
+        </div>
+        <div class="layui-form-item" style="text-align: left;">
+            <label class="layui-form-label label-font">微信号</label>
+            <div class="layui-input-block">
+                <input name="wechatNo" placeholder="请输入微信号!" autocomplete="off" class="layui-input" type="text">
+            </div>
+        </div>
+        <div class="layui-form-item" style="text-align: left;">
+            <label class="layui-form-label">所在公司<i style="color:orange;" class="layui-icon"></i></label>
+            <div class="layui-input-block">
+                <select   name="companyId" lay-verify="companyId" lay-filter="companyId">
+                    <option value="">请选择公司!</option>
+                    <option th:each="tbDict,tbDictStat:${tbDictList}"
+                            th:text="${tbDict.name}" th:value="${tbDict.id}"></option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item" style="text-align: left;">
+            <label class="layui-form-label">所在部门<i style="color:orange;" class="layui-icon"></i></label>
+            <div class="layui-input-block">
+                <select name="deptId" id="deptId" lay-verify="deptId" lay-filter="deptId">
+                    <option value="">请选择部门!</option>
+                    <option th:each="tbDict,tbDictStat:${tbDictList}"
+                            th:text="${tbDict.name}" th:value="${tbDict.id}"></option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item" style="text-align: left;">
+            <label class="layui-form-label label-font">咨询师<i style="color:orange;" class="layui-icon"></i></label>
+            <div class="layui-input-block">
+                <div class="ayui-input-block">
+                    <input name="isConsultant" value="1" lay-verify="gender" title="是"  type="radio">
+                    <input name="isConsultant" value="0" lay-verify="gender" title="否" checked type="radio">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label label-font">操作</label>
+            <input id="add" type="button" class="layui-btn layui-btn-small" lay-submit="" lay-filter="add" value="保存">
+            <input type="reset" class="layui-btn layui-btn-danger layui-btn-small" value="重置">
+            <input type="button" id="cancel" class="layui-btn layui-btn-warm layui-btn-small" value="关闭"/>
+        </div>
+    </form>
+</div>
+<script src="/assets/js/jquery.min.js"></script>
+<script src="/assets/themes/layui/lay/dest/layui.all.js"></script>
+<script src="/assets/My97DatePicker/WdatePicker.js"></script>
+<script src="/script/employeeInfo/add.js"></script>
+</body>
+</html>

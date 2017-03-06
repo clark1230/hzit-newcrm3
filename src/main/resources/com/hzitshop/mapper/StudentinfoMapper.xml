@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzitshop.mapper.StudentinfoMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.hzitshop.entity.Studentinfo">
+		<id column="studentID" property="studentID" />
+		<result column="zixunshiName" property="zixunshiName" />
+		<result column="studentName" property="studentName" />
+		<result column="studentSex" property="studentSex" />
+		<result column="studentTime" property="studentTime" />
+		<result column="studentAge" property="studentAge" />
+		<result column="studentTel" property="studentTel" />
+		<result column="studentXl" property="studentXl" />
+		<result column="studentYx" property="studentYx" />
+		<result column="studentHome" property="studentHome" />
+		<result column="sttudentSchool" property="sttudentSchool" />
+		<result column="stedentClass" property="stedentClass" />
+		<result column="studentStatus" property="studentStatus" />
+		<result column="studentdes" property="studentdes" />
+		<result column="studentintime" property="studentintime" />
+		<result column="studentsal" property="studentsal" />
+	</resultMap>
+	<sql id="studentinfoBaseColumnSql">
+		studentID,
+		zixunshiName,
+		studentName,
+		studentSex,
+		studentTime,
+		studentAge,
+		studentTel,
+		studentXl,
+		studentYx,
+		studentHome,
+		sttudentSchool,
+		stedentClass,
+		studentStatus,
+		studentdes,
+		studentintime,
+		studentsal
+	</sql>
+	<insert id="insertStudentinfo" parameterType="com.hzitshop.entity.Studentinfo">
+		INSERT INTO hzit.studentinfo(
+		<include refid="studentinfoBaseColumnSql"/>
+		)VALUES(
+		#{studentId},
+		#{zixunshiName},
+		#{studentName},
+		#{studentSex},
+		#{studentTime},
+		#{studentAge},
+		#{studentTel},
+		#{studentXl},
+		#{studentYx},
+		#{studentHome},
+		#{sttudentSchool},
+		#{stedentClass},
+		#{studentStatus},
+		#{studentdes},
+		#{studentintime},
+		#{studentsal}
+		)
+	</insert>
+</mapper>

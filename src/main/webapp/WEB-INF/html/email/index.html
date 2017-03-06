@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>邮件发送</title>
+    <link rel="stylesheet" type="text/css" href="/assets/themes/layui/css/layui.css">
+    <link rel="stylesheet" href="/assets/My97DatePicker/skin/twoer/datepicker.css">
+</head>
+<body>
+<div style="margin:20px auto;width:85%;">
+    <form id="sendEmailForm" class="layui-form " method="post">
+        <div class="layui-form-item" style="text-align: left;">
+            <label  class="layui-form-label label-font">发送者邮箱<span style="color:red">*</span></label>
+            <div class="layui-input-block">
+                <input name="from" lay-verify="required" id="from" autocomplete="off"
+                       placeholder="请输入本人的邮箱地址!(xxx@hzitxx.com)" class="layui-input required" type="text">
+            </div>
+        </div>
+        <div class="layui-form-item" style="text-align: left;">
+            <label class="layui-form-label label-font">发送者邮箱密码<span style="color:red">*</span></label>
+            <div class="layui-input-block">
+                <input name="fromPwd" lay-verify="required" id="" autocomplete="off"
+                       placeholder="请输入本人的邮箱密码!" class="layui-input required" type="password">
+            </div>
+        </div>
+        <div class="layui-form-item" style="text-align: left;">
+            <label class="layui-form-label label-font">接受者邮箱<span style="color:red">*</span></label>
+            <div class="layui-input-block">
+                <input name="to" lay-verify="required" id="to" autocomplete="off"
+                       placeholder="请输入接受者的邮箱地址!(xxx#hzitxx.com)" class="layui-input required" type="text">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label label-font">邮件内容<span style="color:red">*</span></label>
+            <div class="layui-input-block">
+            <textarea name="emailContent" id="ueditor" style="height:300px;"></textarea>
+            </div>
+           <!-- <script id="ueditor"></script>-->
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label label-font"></label>
+            <input id="send" type="button" class="layui-btn layui-btn-small" lay-submit="" lay-filter="send"
+                   value="发送" style="width:100px;">
+            <input type="reset" class="layui-btn layui-btn-danger layui-btn-small" value="重置" style="width:100px;">
+           <!-- <input type="button" id="close" class="layui-btn layui-btn-warm layui-btn-small" value="关闭" style="width:100px;"/>-->
+        </div>
+    </form>
+</div>
+<script src="/assets/js/jquery.min.js"></script>
+<script src="/assets/themes/layui/lay/dest/layui.all.js"></script>
+<script src="/assets/ueditor1.4.3/utf8-jsp/ueditor.config.js"></script>
+<script src="/assets/ueditor1.4.3/utf8-jsp/ueditor.all.js"></script>
+<script>
+    $(function(){
+        var ue = UE.getEditor('ueditor');
+        var index = parent.layer.getFrameIndex(window.name); //获取当前窗体索引
+        //监听提交
+        layui.use(['layer','form', 'layedit'], function () {
+            var form = layui.form(), layer = layui.layer, layedit = layui.layedit ;
+            form.on('submit(send)', function (data) {
+                layer.msg('发送邮件!!');
+                //loading层
+                var index2 = layer.load(1, {
+                    shade: [0.1, '#fff'] //0.1透明度的白色背景
+                });
+                //校验表单
+                //提交表单
+                $.post('/email/send', $('#sendEmailForm').serialize(), function (result) {
+                    console.log(result);
+                    if (result.code == 200) {
+                        layer.close(index2);
+                        layer.msg(result.msg);
+                        setTimeout(function () {
+                            parent.layer.close(index);
+                        }, 2000);
+                    } else {
+                        layer.close(index2);
+                        layer.msg(result.msg);
+                    }
+                });
+            });
+            $("#close").click(function(){
+                parent.layer.close(index);
+            });
+        });
+
+    });
+</script>
+</body>
+</html>

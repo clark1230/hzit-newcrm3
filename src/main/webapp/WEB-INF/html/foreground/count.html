@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="CN">
+<head>
+    <title>前台统计</title>
+    <meta name="description" content="这是一个 index 页面">
+    <meta name="keywords" content="index">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta name="apple-mobile-web-app-title" content="Amaze UI" />
+    <script src="/static/assets/js/echarts.min.js"></script>
+    <link rel="stylesheet" href="/static/assets/css/amazeui.min.css" />
+    <link rel="stylesheet" href="/static/assets/css/amazeui.datatables.min.css" />
+    <link rel="stylesheet" href="/static/assets/css/app.css">
+    <link rel="stylesheet" href="/static/bootstrap-datetimepicker-master/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/bootstrap-datetimepicker-master/css/bootstrap-datetimepicker.min.css">
+    <script src="/static/assets/js/jquery.min.js"></script>
+</head>
+<body data-type="widgets">
+<script src="${pageContext.request.contextPath}/static/assets/js/theme.js"></script>
+<div class="am-g tpl-g">
+
+    <!-- 内容区域 -->
+    <div class="tpl-content-wrapper">
+        <div class="row-content am-cf">
+            <div class="row">
+                <div class="am-u-sm-12 am-u-md-12 am-u-lg-3" id="dayTotalCustomerInfo">
+                    <div class="widget am-cf">
+                        <div class="widget-head am-cf">
+                            <div class="widget-title am-fl am-icon-home page-header-heading-icon">当日统计</div>
+                                <div id="showCustomerInfoDay" style="height:350px;width:100%">
+                                </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="am-u-sm-12 am-u-md-12 am-u-lg-9" id="monthTotalCustomerInfo">
+                    <div class="widget am-cf">
+                            <div >
+                                <span style="color:orange">月统计</span>
+                                <input size="16" type="text" value="" placeholder="请选择月份!" id="getYearDay" readonly  class="form_date">
+                            </div>
+                                <div id="showCustomerInfoByMonth" style="height:350px;width:100%">
+                                </div>
+                    </div>
+                </div>
+                <div class="am-u-sm-12 am-u-md-12 am-u-lg-12" id="yearTotalCustomerInfo">
+                    <div class="widget am-cf">
+                       <div class="widget-title am-fl" >年统计</div>
+                       <div id="showCustomerInfoByYear" style="width:100%;height:600px;">
+
+                       </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</div>
+<div data-am-widget="gotop" class="am-gotop am-gotop-default" >
+    <a href="#top" title="回到顶部">
+        <span class="am-gotop-title">回到顶部</span>
+        <i class="am-gotop-icon am-icon-chevron-up"></i>
+    </a>
+</div>
+<script src="/static/assets/js/amazeui.min.js"></script>
+<script src="/static/assets/js/amazeui.datatables.min.js"></script>
+<script src="/static/assets/js/dataTables.responsive.min.js"></script>
+<script src="/static/assets/js/app.js"></script>
+<script src="/static/layer-v2.4/layer/layer.js"></script>
+<script src="/static/formvalidate/Validform_v5.3.2_min.js"></script>
+<script src="/static/scripts/foreground/count.js"></script>
+<script src="/static/bootstrap-datetimepicker-master/js/bootstrap.min.js"></script>
+<script src="/static/bootstrap-datetimepicker-master/js/bootstrap-datetimepicker.min.js"></script>
+<script src="/static/bootstrap-datetimepicker-master/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>授权页面</title>
+    <link rel="stylesheet" href="/assets/zTree/css/zTreeStyle/zTreeStyle.css">
+   <!-- <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">-->
+    <link rel="stylesheet" type="text/css" href="/assets/themes/layui/css/layui.css">
+    <style>
+
+    </style>
+</head>
+<body>
+<input type="hidden" name="userId" th:value="${userId}">
+<div style="margin:10px auto;width:90%;">
+    <span><button type="button" id="expandAll" class="layui-btn   layui-btn-small">
+        <i class="layui-icon"></i>全部展开</button> </span>
+    <span><button type="button" id="unExpandAll" class="layui-btn layui-btn-warm  layui-btn-small">
+        <i class="layui-icon"></i>全部折叠</button></span>
+    <span><button type="button" id="unChecked" class="layui-btn layui-btn-primary layui-btn-small">
+        <i class="layui-icon layui-anim layui-anim-rotate layui-anim-loop">ဂ</i>取消勾选</button></span>
+    <span><button type="button" id="grantResource" class="layui-btn  layui-btn-small" style="background-color: purple;width:70px;">
+        <i class="layui-icon"></i>授权</button>  </span>
+    <span><button type="button" id="close"   class="layui-btn  layui-btn-small" style="background-color: green;width:70px;">
+        <i class="layui-icon">ဆ</i>关闭</button> </span>
+    <ul id="treeDemo" class="ztree">
+    </ul>
+</div>
+
+<script src="/assets/js/jquery-2.0.0.min.js"></script>
+<script src="/assets/zTree/js/jquery.ztree.all.min.js"></script>
+<script src="/assets/themes/layui/lay/dest/layui.all.js"></script>
+<script src="/script/permission/index.js"></script>
+
+</body>
+</html>

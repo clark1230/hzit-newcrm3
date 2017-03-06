@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>主题设置</title>
+  <meta name="keywords" content="desktop-Webos,Webos,windows-webos">
+  <meta name="description" content="基于layui打造的WEBOS，作者：SMALL,QQ:1531982850,获取源码请加QQ群：601178086">
+  <meta name="renderer" content="webkit|ie-comp|ie-stand">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="stylesheet" type="text/css" href="themes/layui/css/layui.css">
+  <style>
+  	.desktop-themes{ width:450px; margin:0 auto; overflow:hidden; padding:10px 5px;}
+	.set-themes{ width:140px; height:140px; float:left; margin:5px; text-align:center; cursor:pointer;}
+	.set-themes img{ width:140px; height:100px;}
+	.set-themes .title{ line-height:40px; height:40px; font-size:18px; color:#5FB878}
+  </style>
+</head>
+
+<body>
+<div class="desktop-themes">
+    
+</div>
+<script>
+	var themesdata = [
+		{"id":"1","name":"bg1","smallurl":"themes/desktop/images/bg1_small.jpg","url":"themes/desktop/images/bg1.jpg"},
+		{"id":"2","name":"bg2","smallurl":"themes/desktop/images/bg2_small.jpg","url":"themes/desktop/images/bg2.jpg"},
+		{"id":"3","name":"bg3","smallurl":"themes/desktop/images/bg3_small.jpg","url":"themes/desktop/images/bg3.jpg"},
+		{"id":"4","name":"bg4","smallurl":"themes/desktop/images/bg4_small.jpg","url":"themes/desktop/images/bg4.jpg"},
+		{"id":"5","name":"bg5","smallurl":"themes/desktop/images/bg5_small.jpg","url":"themes/desktop/images/bg5.jpg"},
+	];
+</script>
+<script src="themes/layui/layui.js"></script>
+<script>
+layui.use(['jquery','flow','upload','laytpl'],function(){
+	var $ = layui.jquery,flow = layui.flow,laytpl=layui.laytpl;
+
+	 var themestmp = [
+	 '{{# layui.each(d, function(index, item){}}'
+	 ,'<div class="set-themes" data-url="{{item.url}}" data-id="" data-name="{{item.name}}">'
+    	,'<img lay-src="{{item.smallurl}}">'
+        ,'<label class="title">{{item.name}}</label>'
+    ,'</div>'
+	,'{{# });}}'].join("")
+		,upload=['<div class="set-themes">'
+			,'<div class="themes-upbar">'
+			   ,'<input type="file" name="file" class="layui-upload-file" id="themes-upbar">'
+			 ,'</div>'
+	   ,'</div>'].join("");
+	 laytpl(themestmp).render(themesdata, function(html){
+	   $(".desktop-themes").html(html+upload);	 
+	});
+	flow.lazyimg();
+	$(".set-themes").on("click",function(){
+		var that = $(this),data = that.data();
+		parent.layui.jquery("body").css("background-image","url("+data.url+")");
+	});
+	layui.upload({
+		url: '/test/upload.json'
+		,elem: '#themes-upbar' //指定原始元素，默认直接查找class="layui-upload-file"
+		,method: 'get' //上传接口的http类型
+		,success: function(res){
+		  LAY_demo_upload.src = res.url;
+		}
+	}); 
+});
+
+
+
+</script>
+
+</body>
+</html>

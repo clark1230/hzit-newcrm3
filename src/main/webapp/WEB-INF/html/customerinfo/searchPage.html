@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>搜索页</title>
+    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
+    <style>
+        td{
+            width:300px;
+        }
+    </style>
+</head>
+<body>
+
+<div style="margin:20px auto;width:90%;">
+    <form action="" >
+        <table  cellpadding="5px" cellspacing="5px">
+            <tr >
+                <td>
+                    <label>搜索条件</label>
+                    <select class="form-control" id="searchParam">
+                        <option value="-1">请选择搜索条件!</option>
+                        <option value="real_name">学员姓名</option>
+                        <option value="age">年龄</option>
+                        <option value="tel">电话号码</option>
+                        <option value="native_place">籍贯</option>
+                        <option value="wechat_no">微信号</option>
+                        <option value="qq">qq号</option>
+                        <option value="graduate_time">毕业时间</option>
+                        <option value="graduate_from">毕业学校</option>
+                        <option value="major_in">专业</option>
+                    </select>
+                </td>
+                <td>
+                    <label>搜索值&nbsp;</label>
+                    <input type="text" id="searchValue" class="form-control" placeholder="请输入搜索值!">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>学员状态</label>
+                    <select class="form-control" id="customerState" name="customerState">
+                        <option value="-1">请选择学员状态</option>
+                        <option th:each="customerState,customerStateStat:${customerStateList}"
+                                th:text="${customerState.name}" th:value="${customerState.id}"></option>
+                    </select>
+                </td>
+                <td>
+                    <label>学员级别</label>
+                    <select class="form-control" id="customerLevel" name="customerLevel">
+                        <option value="-1">请选择学员级别!</option>
+                        <option th:each="customerLevel,customerLevelStat:${customerLevelList}"
+                                th:text="${customerLevel.name}" th:value="${customerLevel.id}"></option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>目标技能</label>
+                    <select class="form-control" id="targetSkill" name="targetSkill">
+                        <option value="-1">请选择目标技能!</option>
+                        <option th:each="targetSkill,targetSkillStat:${targetSkillList}"
+                                th:text="${targetSkill.name}" th:value="${targetSkill.id}"></option>
+                    </select>
+                </td>
+                <td>
+                    <label >邀约人&nbsp;</label>
+                    <select class="form-control" id="introducer" name="introducer">
+                        <option value="-1">请选择邀约人!</option>
+                        <option th:each="introducer,introducerStat:${introducerList}"
+                                th:text="${introducer.name}" th:value="${introducer.userId}"></option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="form-group">
+                        <label >应聘渠道</label>
+                        <select class="form-control" id="recruit_channel" name="recruitChannel">
+                            <option value="-1">请选择应聘渠道!</option>
+                            <option th:each="recruitChannel,recruitChannelStat:${recruitChannelList}"
+                                    th:text="${recruitChannel.name}" th:value="${recruitChannel.id}"></option>
+                        </select>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        <label >关单人&nbsp;</label>
+                        <select class="form-control" id="guandan" name="guandan">
+                            <option value="-1">请选择关单人!</option>
+                            <option th:each="guandan,tguandanStat:${guandanList}"
+                                    th:text="${guandan.name}" th:value="${guandan.userId}"></option>
+                        </select>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label >咨询师&nbsp;</label>
+                    <div class="form-group">
+                        <select class="form-control" id="user_id" name="userId">
+                            <option value="">请选择咨询师!</option>
+                            <option th:each="guandan,tguandanStat:${guandanList}"
+                                    th:text="${guandan.name}" th:value="${guandan.userId}"></option>
+                        </select>
+                    </div>
+                </td>
+                <td>
+                    <label>查询</label>
+                    <div class="form-group">
+                        <select  class="form-control">
+                            <option selected>AND</option>
+                            <option>OR</option>
+                        </select>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button type="button" style="width:100px;" id="search" class="btn btn-primary">搜索</button>
+                    <button type="button" style="width:100px;" id="close" class="btn btn btn-danger">关闭</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+<script src="/assets/js/jquery.min.js"></script>
+<script src="/assets/layer/layer.js"></script>
+<script src="/assets/bootstrap/js/bootstrap.min.js"></script>
+<script src="/assets/themes/layui/lay/dest/layui.all.js"></script>
+<script src="/script/customerinfo/searchPage.js"></script>
+</body>
+</html>

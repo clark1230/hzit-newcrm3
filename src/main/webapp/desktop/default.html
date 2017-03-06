@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Desktop-Webos前端框架系统</title>
+    <meta name="keywords" content="desktop-Webos,Webos,windows-webos">
+    <meta name="description" content="基于layui打造的WEBOS，作者：SMALL,QQ:1531982850,获取源码请加QQ群：601178086">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" type="text/css" href="themes/layui/css/layui.css">
+    <link rel="stylesheet" type="text/css" href="themes/desktop/style/swiper-3.4.0.min.css">
+    <link rel="stylesheet" type="text/css" href="themes/desktop/style/desktop.css?t">
+    <meta name="baidu-site-verification" content="btBYeQVH5L"/>
+</head>
+<body class="desktop-bg">
+<div class="" id="loading" style="position: absolute; top: 49%; left: 50%; margin-left: -73px; display:block;"><i
+        class="layui-icon layui-anim layui-anim-rotate layui-anim-loop">ဂ</i></div>
+<!--桌面app配置参数-->
+<script type="text/javascript">
+    var desktpData = {
+        menu: [{menuid: "m001", name: "1", app: "m101 m102 m103 m104 m105 m106 m107 m108".split(" ")}, {
+            menuid: "m002",
+            name: "2",
+            app: ["m201", "m202"]
+        }, {menuid: "m003", name: "3", app: ["m301"]}, {
+            menuid: "m004",
+            name: "opening",
+            app: "m401 m402 m403 m404 m405 m406".split(" ")
+        }], apps: {
+            m101: {
+                appid: "101",
+                isicon: 1,
+                icon: "&#xe638;",
+                iconbg: "#51555e",
+                name: "\u5f39\u51fa\u5c42",
+                url: "http://layer.layui.com",
+                height: "",
+                width: ""
+            },
+            m102: {
+                appid: "102",
+                isicon: 1,
+                icon: "&#xe63a;",
+                iconbg: "#60b979",
+                name: "\u5373\u65f6\u901a\u8baf",
+                url: "http://layim.layui.com/",
+                height: "",
+                width: ""
+            },
+            m103: {
+                appid: "103",
+                isicon: 1,
+                icon: "&#xe637;",
+                iconbg: "#d3b59d",
+                name: "\u65e5\u671f\u65f6\u95f4\u9009\u62e9",
+                url: "http://laydate.layui.com/",
+                height: "",
+                width: ""
+            },
+            m104: {
+                appid: "104",
+                isicon: 1,
+                icon: "&#xe633;",
+                iconbg: "#109b8e",
+                name: "\u5206\u9875",
+                url: "http://laypage.layui.com/",
+                height: "",
+                width: ""
+            },
+            m105: {
+                appid: "105",
+                icon: "&#xe628;",
+                iconbg: "#e6db74",
+                name: "\u6a21\u677f\u5f15\u64ce",
+                url: "http://laytpl.layui.com/",
+                isicon: 1,
+                height: "",
+                width: ""
+            },
+            m106: {
+                appid: "106", icon: "&#xe639;", iconbg: "#e6db74",
+                name: "\u8868\u5355", url: "customer.html", isicon: 1, height: "", width: ""
+            },
+            m107: {
+                appid: "107",
+                icon: "&#xe62f;",
+                iconbg: "#e6db74",
+                name: "\u6587\u4ef6\u4e0a\u4f20",
+                url: "http://www.layui.com/doc/modules/upload.html",
+                isicon: 1,
+                height: "",
+                width: ""
+            },
+            m108: {
+                appid: "108",
+                icon: "&#xe62c;",
+                iconbg: "#b074e6",
+                name: "点赞",
+                url: "http://fly.layui.com/case/2016/top/",
+                isicon: 1,
+                height: "",
+                width: "",
+                target: "_blank"
+            },
+            m201: {
+                appid: "107",
+                icon: "&#xe62f;",
+                iconbg: "#e6db74",
+                name: "\u5e38\u7528\u5143\u7d20\u64cd\u4f5c",
+                url: "http://www.layui.com/doc/modules/element.html",
+                isicon: 1,
+                height: "",
+                width: ""
+            },
+            m202: {
+                appid: "107",
+                icon: "&#xe62f;",
+                iconbg: "#e6db74",
+                name: "\u6587\u4ef6\u4e0a\u4f20",
+                url: "http://www.layui.com/doc/modules/upload.html",
+                isicon: 1,
+                height: "",
+                width: ""
+            },
+            m301: {
+                appid: "301",
+                icon: "&#xe635;",
+                iconbg: "#e6db74",
+                name: "\u4ee3\u7801\u4fee\u9970\u5668",
+                url: "http://www.layui.com/doc/modules/code.html",
+                isicon: 1,
+                height: "",
+                width: ""
+            },
+            m401: {
+                appid: "101",
+                isicon: 1,
+                icon: "&#xe638;",
+                iconbg: "#51555e",
+                name: "\u5f39\u51fa\u5c42",
+                url: "http://layer.layui.com",
+                height: "",
+                width: ""
+            },
+            m402: {
+                appid: "102",
+                isicon: 1,
+                icon: "&#xe63a;",
+                iconbg: "#60b979",
+                name: "\u5373\u65f6\u901a\u8baf",
+                url: "http://layim.layui.com/",
+                height: "",
+                width: ""
+            },
+            m403: {
+                appid: "103",
+                isicon: 1,
+                icon: "&#xe637;",
+                iconbg: "#d3b59d",
+                name: "\u65e5\u671f\u65f6\u95f4\u9009\u62e9",
+                url: "http://laydate.layui.com/",
+                height: "",
+                width: ""
+            },
+            m404: {
+                appid: "104",
+                isicon: 1,
+                icon: "&#xe633;",
+                iconbg: "#109b8e",
+                name: "\u5206\u9875",
+                url: "http://laypage.layui.com/",
+                height: "",
+                width: ""
+            },
+            m405: {
+                appid: "105",
+                icon: "&#xe628;",
+                iconbg: "#e6db74",
+                name: "\u6a21\u677f\u5f15\u64ce",
+                url: "http://laytpl.layui.com/",
+                isicon: 1,
+                height: "",
+                width: ""
+            },
+            m406: {
+                appid: "106",
+                icon: "&#xe639;",
+                iconbg: "#e6db74",
+                name: "\u8868\u5355",
+                url: "customer.html",
+                isicon: 1,
+                height: "",
+                width: ""
+            }
+        }
+    };
+</script>
+
+<!--主桌面-->
+<div class="swiper-container desktop-container small-click" data-type="hidemenu">
+    <div class="swiper-pagination"></div>
+    <div class="swiper-wrapper">
+    </div>
+</div>
+<!--任务栏-->
+<div class="desktop-taskbar">
+    <!--div class="desktop-taskbar-pr"></div-->
+    <div id="opening-menu" class="opening-menu">
+        <div class="opening-menu-app-list"></div>
+        <div class="opening-menu-user">
+            <div class="desktop-opening-icon"></div>
+            <div class="opening-menu-user-list">
+                <a title="系统设置" data-type="setting" class="dock_tool_setting small-click"
+                   href="javascript:void(0)">系统设置</a>
+                <a title="主题设置" data-type="theme" class="dock_tool_theme small-click" href="javascript:void(0)">主题设置</a>
+                <a title="个人资料" data-type="users" class="dock_tool_ziliao small-click"
+                   href="javascript:void(0)">个人资料</a>
+                <a title="注销登录" data-type="loginout" class="dock_tool_loginout small-click" href="javascript:void(0)">注销登录</a>
+            </div>
+        </div>
+    </div>
+    <!--开始菜单-->
+    <div class="layui-inline taskbar-win small-click" data-type="openingmenu">
+        <i class="iconfont icon-windows">&#xe75e;</i>
+    </div>
+    <!---->
+    <div class="layui-inline desktop-taskbar-app-list">
+
+    </div>
+    <!--时间显示-->
+    <div class="layui-inline taskbar-time">
+        <label id="laydate-hs"></label>
+        <label id="laydate-ymd"></label>
+    </div>
+    <div class="layui-inline taskbar-showdesktop small-click" data-type="showdesktop" title="显示桌面"></div>
+</div>
+<!--右键菜单-->
+<div class="desktop-menu">
+    <ul>
+        <li><a href="javascript:;" class="small-click" data-type="showdesktop">显示桌面</a></li>
+        <li><a href="javascript:;" class="small-click" data-type="closeall">关闭所有</a></li>
+        <li><a href="javascript:;" class="small-click" data-type="lockscreen">锁屏</a></li>
+        <hr/>
+        <li><a href="javascript:;" class="small-click" data-type="setting">系统设置</a></li>
+        <li><a href="javascript:;" class="small-click" data-type="theme">主题设置</a></li>
+        <li><a href="javascript:;" class="small-click" data-type="technicalsupport">技术支持</a></li>
+        <hr/>
+        <li><a href="javascript:;" class="small-click" data-type="loginout">注销</a></li>
+    </ul>
+</div>
+</body>
+<script src="themes/layui/lay/dest/layui.all.js"></script>
+<script src="themes/desktop/js/swiper.js"></script>
+<script src="themes/desktop/js/jquery-ui.min.js"></script>
+<script src="themes/desktop/js/desktop.js"></script>
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?f8df255dfb46b5e00186a537e73370d1";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+
+    layui.use('layer', function () {
+        var layer = layui.layer, $ = layui.jquery;
+
+        var dz = $(".desktop-app:eq(7)");
+        layer.tips("记得点我给我点赞哦！", dz, {time: 5000});
+    });
+</script>
+
+</body>
+</html>

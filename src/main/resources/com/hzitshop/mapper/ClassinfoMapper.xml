@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzitshop.mapper.ClassinfoMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.hzitshop.entity.Classinfo">
+		<id column="classId" property="classId" />
+		<result column="classname" property="classname" />
+		<result column="classLx" property="classLx" />
+		<result column="classWz" property="classWz" />
+		<result column="classTime" property="classTime" />
+		<result column="classZt" property="classZt" />
+		<result column="classTeacher" property="classTeacher" />
+		<result column="classSchool" property="classSchool" />
+	</resultMap>
+
+
+	<select id="selectClassInfo" resultMap="BaseResultMap">
+		SELECT  * from   hzit.classinfo
+	</select>
+</mapper>
