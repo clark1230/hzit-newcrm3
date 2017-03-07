@@ -23,4 +23,11 @@ public interface CustomerInfoMapper extends BaseMapper<CustomerInfo> {
      * @return
      */
   List<CompanyCount> companyCount(@Param("map") Map<String,Object> map);
+
+    /**
+     * 每月每个校区每个咨询师的报名量!!!
+     * @param map
+     * @return
+     */
+  List<CompanyCount> baoming(@Param("map") Map<String,Object> map);
 }

@@ -403,10 +403,7 @@ $(function () {
     //var url = '/customerInfo/customerInfoList?userId='+$('#hiddenEmployeeInfoUserId').val();
     var queryParam;
     $('#searchValue').blur(function(){
-        /*var $searchParam = $('#searchParam option:selected');
-         if($searchParam.val() == -1){
-         layer.msg('请选择搜索条件!');
-         }*/
+
         if($(this).val()===''){
             layer.msg('请输入搜索值!');
             $(this).addClass('search-border-color');
@@ -427,7 +424,7 @@ $(function () {
 
     //****************************刷新*****************************************
     $("#searchRefresh").click(function(){
-        $.get('/customerInfo/listData?isDelete=0',function(result){
+        $.get(url,function(result){
             if(typeof(result)=='object'){
                 //清空查询条件
                 $('#searchValue').val('');
@@ -442,7 +439,6 @@ $(function () {
 
 
     $('#searchCustomerInfo').click(function () {
-        //url= "/customerInfo/listData";
         //搜索条件和搜索值验证
         //验证搜索值
         var $searchValue =$("#searchValue");
@@ -467,7 +463,7 @@ $(function () {
             $searchParam.removeClass('search-border-color');
         }
 
-        var value ='/customerInfo/recycleBinAjaxData?isDelete=1&offset='+searchParams.offset+'&limit=' +searchParams.limit+
+        var value =url+'&offset='+searchParams.offset+'&limit=' +searchParams.limit+
             '&condition='+$('#searchParam option:selected').val()+ '&value='+$("#searchValue").val();
         $.get(value,function(result){
             $table.bootstrapTable('load', result);
@@ -476,8 +472,6 @@ $(function () {
                 limit:searchParams.limit,
                 condition:$('#searchParam option:selected').val(),
                 value:$("#searchValue").val() //,
-                /* sort:"",
-                 order:""*/
             };
             searchParams = tmp;
             console.log(searchParams);
@@ -536,12 +530,11 @@ $(function () {
                     $option = $("<option value='"+conditionArr[item][0]+"'>"+conditionArr[item][1]+"</option>");
                     $searchParam.append($option);
                 });
-                $.get('/customerInfo/listData?isDelete=1',function(result){
+                $.get(url,function(result){
                     if(typeof(result)=='object'){
                         //清空查询条件
                         $('#searchValue').val('');
                         $('#searchValue').css('display','inline');
-                        //$('#searchParam').children('option[value="-1"]').attr("selected","selected");
                         $table.bootstrapTable('load', result);
                         layer.msg('已重新获取数据!');
                     }

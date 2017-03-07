@@ -57,4 +57,20 @@ public class StatisticsController {
         List<CompanyCount> companyCounts = iCustomerInfoService.companyCount(paramMap);
         return companyCounts;
     }
+
+    /**
+     * 获取每月每个校区每个咨询师的报名量
+     * @param companyId
+     * @param month
+     * @return
+     */
+    @RequestMapping(value="/statistics/baoming")
+    @ResponseBody
+    protected  List<CompanyCount> baoming(String companyId,String month){
+        Map<String,Object> paramMap = new HashMap<>();
+        paramMap.put("companyId",companyId);
+        paramMap.put("month",month);
+        List<CompanyCount> baomingList = iCustomerInfoService.baoming(paramMap);
+        return baomingList;
+    }
 }

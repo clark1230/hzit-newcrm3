@@ -198,4 +198,14 @@ public class CustomerInfoServiceImpl extends ServiceImpl<CustomerInfoMapper, Cus
     public List<CompanyCount> companyCount(Map<String, Object> map) {
         return customerInfoMapper.companyCount(map);
     }
+
+    /**
+     * 每月每个校区每个咨询师的报名量!!!
+     * @param map
+     * @return
+     */
+    @Override
+    public List<CompanyCount> baoming(Map<String, Object> map) {
+        return customerInfoMapper.baoming(map);
+    }
 }

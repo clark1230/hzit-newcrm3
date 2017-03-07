@@ -33,8 +33,25 @@ $(function(){
             }
             showCompanyCount(result,tartgetSkillData);
         });
+        $.get('/statistics/baoming?companyId='+companyId+"&month="+currentMonth,function(result){
+             if(result.length ==0){
+                 layer.msg('报名人数');
+                 $("select[name='company']").children('option[value="-1"]').attr("selected","selected");
+                 return false;
+             }
+             var baoMingData = [];
+             var baoMingCount =[];
+             for(var i =0;i<result.length;i++){
+                 baoMingData.push(result[i].name);
+                 baoMingCount.push(result[i].value);
+             }
+             showBaoMing(baoMingCount,baoMingData);
+        });
     }
 
+    /**
+     * 中间操作(点击日期时，其实就是调用该按钮的点击事件)
+     */
     $("#search").click(function(){
         //获取分公司数据
         var companyValue= $("select[name='company']").children("option:selected").val();
@@ -48,9 +65,10 @@ $(function(){
         //调用函数
         initData(companyValue,monthValue);
     });
-    $("div[class='WdateDiv']").click(function(){
-       alert('哈哈');
-    });
+
+    /**
+     * 日期选择
+     */
     function datePick(){
         //获取分公司数据
         var companyValue= $("select[name='company']").children("option:selected").val();
@@ -69,11 +87,19 @@ $(function(){
         var  option = {
             backgroundColor: '#F9F8F8',
             title: {
-                text: '合众艾特咨询系统统计',
+                text: '学员意向',
                 textStyle:
                     {fontSize:22},
                 subtext: '单位：人',
                 x:'20%',
+            },
+            toolbox: {
+                show: true,
+                feature: {
+                    dataView: {readOnly: false},
+                    restore: {},
+                    saveAsImage: {}
+                }
             },
             tooltip : {
                 trigger: 'item',
@@ -126,4 +152,65 @@ $(function(){
         myChart.setOption(option);
     }
 
+    /**
+     * 每月每个校区每个咨询师的报名量
+     * @param result
+     * @param baoMingData
+     */
+    var myChart2 = echarts.init(document.getElementById('showBaoMing'));
+    function showBaoMing(baoMingCount,baoMingData){
+        var option = {
+            title:{
+                text:'咨询师月报名量',
+                textStyle:
+                    {fontSize:22},
+                subtext: '单位：人',
+                x:'20%',
+            },
+            color: ['#3398DB'],
+            tooltip : {
+                trigger: 'axis',
+                axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+                    type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                }
+            },
+            toolbox: {
+                show: true,
+                feature: {
+                    dataView: {readOnly: false},
+                    restore: {},
+                    saveAsImage: {}
+                }
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis : [
+                {
+                    type : 'category',
+                    data : baoMingData,
+                    axisTick: {
+                        alignWithLabel: true
+                    }
+                }
+            ],
+            yAxis : [
+                {
+                    type : 'value'
+                }
+            ],
+            series : [
+                {
+                    name:'报名人数',
+                    type:'bar',
+                    barWidth: '60%',
+                    data:baoMingCount
+                }
+            ]
+        };
+        myChart2.setOption(option);
+    }
 });

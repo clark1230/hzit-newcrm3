@@ -144,7 +144,26 @@ $(function(){
         parent.layer.close(index);//关闭层
 
     });
-
+    //校验
+    var $tel =$("input[name='tel']");
+    var $realName = $("input[name='realName']");
+    $tel.blur(function(){
+            var telValue = $tel.val();
+            if(telValue!='' && $realName.val()!=''){
+                //到服务器中检测该用户是否存在!!
+                $.get('/customerInfo/checkCustomerInfo?realName='+$realName.val()+"&tel="+$tel.val(),function(result){
+                    if(result.code==200){
+                        layer.msg(result.msg);
+                        $('#realName').css('border-color','lightgrey');
+                        $('#add').css('pointer-events','visible').css('background-color','#0099FF');
+                    }else{
+                        $('#realName').css('border-color','red');
+                        $('#add').css('pointer-events','none').css('background-color','lightgrey');
+                        layer.msg(result.msg);
+                    }
+                });
+            }
+    });
     
     layui.use(['layer','form', 'layedit'], function () {
         var form = layui.form()

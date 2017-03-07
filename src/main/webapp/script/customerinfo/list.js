@@ -643,7 +643,15 @@ $(function () {
                        $option = $("<option value='"+conditionArr[item][0]+"'>"+conditionArr[item][1]+"</option>");
                         $searchParam.append($option);
                     });
-                    $.get('/customerInfo/listData?isDelete=0',function(result){
+                    var url = "";
+                    var isConsultant = $("input[name='isConsultant']").val();
+                    userId = $("input[name='userId']").val();
+                    if(isConsultant =='0'){//不是咨询师
+                        url = '/customerInfo/listData?isDelete=0';
+                    }else if(isConsultant =='1'){   //是咨询师
+                        url = '/customerInfo/listData?isDelete=0&userId='+userId;
+                    }
+                    $.get(url,function(result){
                         if(typeof(result)=='object'){
                             //清空查询条件
                             $('#searchValue').val('');

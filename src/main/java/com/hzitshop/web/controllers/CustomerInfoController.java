@@ -568,14 +568,26 @@ public class CustomerInfoController {
    }
 
 
-    /**************数据统计开始***********************/
-    /*@RequestMapping(value="/customerInfo/")
-    protected  String index(){
-        return null;
-    }*/
-
-
-    /**************数据统计结束***********************/
+    /**
+     * 根据用户名和电话号码检测该用户是否存在(防止抢单)
+     * @return
+     */
+    @RequestMapping("/customerInfo/checkCustomerInfo")
+    @ResponseBody
+    public  Map<String,Object> checkCustomerInfo(CustomerInfo customerInfo){
+        customerInfo =iCustomerInfoService.selectOne(new EntityWrapper<CustomerInfo>()
+                .where("real_name='"+customerInfo.getRealName()+"'")
+                .and("tel='"+customerInfo.getTel()+"'"));
+        Map<String,Object> resultMap = new HashMap<>();
+        if(customerInfo != null){
+             resultMap.put("code",300);
+             resultMap.put("msg","该学员已经存在了!");
+        } else{
+             resultMap.put("code",200);
+             resultMap.put("msg","该学员可以录入!");
+        }
+        return resultMap;
+    }
 
 
 

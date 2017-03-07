@@ -172,6 +172,20 @@ $(function(){
       checkTel();
       if($('#tel').val() !=''){
           $('#tel').css('border-color','lightgrey');
+          if($("#realName").val()!=''){
+              //到服务器中检测该用户是否存在!!
+              $.get('/customerInfo/checkCustomerInfo?realName='+$("#realName").val()+"&tel="+$(this).val(),function(result){
+                  if(result.code==200){
+                      layer.msg(result.msg);
+                      $('#realName').css('border-color','lightgrey');
+                      $('#btnAddCustomer').css('pointer-events','visible').css('background-color','#0099FF');
+                  }else{
+                      $('#realName').css('border-color','red');
+                      $('#btnAddCustomer').css('pointer-events','none').css('background-color','lightgrey');
+                      layer.msg(result.msg);
+                  }
+              });
+          }
       }
     });
     function checkTel(){

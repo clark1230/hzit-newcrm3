@@ -1,6 +1,5 @@
 package com.hzitshop.service;
 
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.hzitshop.entity.CustomerInfo;
@@ -46,4 +45,10 @@ public interface ICustomerInfoService extends IService<CustomerInfo> {
      * @return
      */
     List<CompanyCount> companyCount(@Param("map") Map<String,Object> map);
+    /**
+     * 每月每个校区每个咨询师的报名量!!!
+     * @param map
+     * @return
+     */
+    List<CompanyCount> baoming(Map<String,Object> map);
 }

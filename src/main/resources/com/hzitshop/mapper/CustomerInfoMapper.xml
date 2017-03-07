@@ -45,4 +45,15 @@
 		and  DATE_FORMAT(create_time,'%Y-%m') = #{map.month} GROUP BY di.tid ;
 
 	</select>
+	
+	<select id="baoming" resultType="com.hzitshop.vo.CompanyCount" parameterType="map">
+		select ei.name as name,count(ci.user_id) as value  from
+			customer_info ci,
+			employee_info ei
+		where ei.user_id =ci.user_id
+		and ci.customer_state=32
+		and DATE_FORMAT(ci.create_time,'%Y-%m')=#{map.month}
+		and ci.company_id = #{map.companyId}
+		group by ei.name;
+	</select>
 </mapper>
